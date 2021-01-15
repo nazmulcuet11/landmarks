@@ -15,14 +15,15 @@ struct CategoryHome: View {
         return modelData.categories.keys.sorted()
     }
 
+    var pages: [FeatureCard] {
+        return modelData.featuredLandmarks.map({ FeatureCard(landmark: $0) })
+    }
+
     var body: some View {
         NavigationView {
             List {
-                modelData.featuredLandmarks[0].image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 200)
-                    .clipped()
+                PageView(pages: pages)
+                    .aspectRatio(3 / 2, contentMode: .fit)
                     .listRowInsets(EdgeInsets())
 
                 ForEach(categoryNames, id: \.self) {
