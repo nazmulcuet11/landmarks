@@ -17,14 +17,22 @@ struct CategoryHome: View {
     var body: some View {
         NavigationView {
             List {
+                modelData.featuredLandmarks[0].image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 200)
+                    .clipped()
+                    .listRowInsets(EdgeInsets())
+
                 ForEach(categoryNames, id: \.self) {
                     categoryName in
-
+                    
                     CategoryRow(
                         categoryName: categoryName,
                         items: modelData.categories[categoryName] ?? []
                     )
                 }
+                .listRowInsets(EdgeInsets())
             }
             .navigationTitle("Featured")
         }

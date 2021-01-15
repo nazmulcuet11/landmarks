@@ -18,6 +18,10 @@ final class ModelData: ObservableObject {
             by: { $0.category.rawValue }
         )
     }
+
+    var featuredLandmarks: [Landmark] {
+        return landmarks.filter({ $0.isFeatured })
+    }
 }
 
 func load<T: Decodable>(_ fileName: String) -> T {
